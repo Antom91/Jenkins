@@ -1,35 +1,35 @@
 version: "3.0"
 
 services:
-  traefik:
-    image: traefik:1.7
-    container_name: "traefik"
-    command:
-      - "--api"
-      - "--entrypoints=Name:http Address::80 Redirect.EntryPoint:https"
-      - "--entrypoints=Name:https Address::443 TLS TLS.minVersion::VersionTLS12 TLS.CipherSuites:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305"
-      - "--defaultentrypoints=http,https"
-      - "--acme"
-      - "--acme.storage=/etc/traefik/acme/acme.json"
-      - "--acme.entryPoint=https"
-      - "--acme.httpChallenge.entryPoint=http"
-      - "--acme.onHostRule=true"
-      - "--acme.onDemand=false"
-      - "--acme.email=toshuk.kr@gmail.com"
-      - "--docker"
-      - "--docker.watch"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./traefik/acme:/etc/traefik/acme
-    ports:
-      - "80:80"
-      - "443:443"
-    restart: unless-stopped
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10M"
-        max-file: "5"
+  # traefik:
+  #   image: traefik:1.7
+  #   container_name: "traefik"
+  #   command:
+  #     - "--api"
+  #     - "--entrypoints=Name:http Address::80 Redirect.EntryPoint:https"
+  #     - "--entrypoints=Name:https Address::443 TLS TLS.minVersion::VersionTLS12 TLS.CipherSuites:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305"
+  #     - "--defaultentrypoints=http,https"
+  #     - "--acme"
+  #     - "--acme.storage=/etc/traefik/acme/acme.json"
+  #     - "--acme.entryPoint=https"
+  #     - "--acme.httpChallenge.entryPoint=http"
+  #     - "--acme.onHostRule=true"
+  #     - "--acme.onDemand=false"
+  #     - "--acme.email=toshuk.kr@gmail.com"
+  #     - "--docker"
+  #     - "--docker.watch"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - ./traefik/acme:/etc/traefik/acme
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   restart: unless-stopped
+  #   logging:
+  #     driver: "json-file"
+  #     options:
+  #       max-size: "10M"
+  #       max-file: "5"
 
   jenkins:
     build:
